@@ -22,10 +22,12 @@ public class MainManager : MonoBehaviour
     public BuildingManager buildingManager;
     public Camera GameCamera;
     public GameObject BuildGrid;
+    public ParticleSystem DestroyExplosion;
 
     private int lives = 3;
     private int score = 0;
-    private float timeBeforeNextWave = 10;
+    private float timeBetweenWaves = 10f;
+    private float timeBeforeNextWave;
     private bool inBuildTime;
     private int enemyWaveNumber = 0;
     private TowerUnit selectedTower = null;
@@ -42,7 +44,15 @@ public class MainManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         LivesText.text = "Lives: " + lives;
         ScoreText.text = "Score: " + score;
-        inBuildTime = true;        
+        inBuildTime = true;
+        timeBeforeNextWave = timeBetweenWaves;
+        DestroyExplosion.Stop();
+    }
+
+    internal void StartDestroyAnimation(Vector3 position)
+    {
+        DestroyExplosion.transform.position = position;
+        DestroyExplosion.Play();
     }
 
     internal void ReduceLives()
@@ -96,17 +106,20 @@ public class MainManager : MonoBehaviour
             }
             TimeText.text = "Next wave in " + Math.Floor(timeBeforeNextWave) + " sec";
         }
-        if(AreEnemiesAllDead())
+        else
         {
-            inBuildTime = true;
-            timeBeforeNextWave = 20;
-        }
-    }   
+            if (AreEnemiesAllDead())
+            {
+                inBuildTime = true;
+                timeBeforeNextWave = timeBetweenWaves;
+            }
+        }        
+    }
 
     private bool AreEnemiesAllDead()
     {
-        //Todo, count number of alive enemies
-        return false;
+        var allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        return allEnemies.Length == 0;
     }
 
     private void SpawnNextWave()

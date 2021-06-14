@@ -24,7 +24,6 @@ public class EnemyUnit : MonoBehaviour
         {
             ReachedGoal();
         }
-
     }
 
     internal virtual void ReachedGoal()
@@ -42,7 +41,14 @@ public class EnemyUnit : MonoBehaviour
 
     internal bool Hit()
     {
+        //Check position of the enemy. Should be invurable until passed the gate.
+        if(transform.position.x < -35)
+        {
+            return false;
+        }
+
         MainManager.Instance.IncreaseScore(5);
+        MainManager.Instance.StartDestroyAnimation(transform.position);
         Destroy(gameObject);
         return true;
     }

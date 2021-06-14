@@ -5,6 +5,12 @@ public class BuildingManager : MonoBehaviour
 {
     public GameObject TowerPrefab;
     public GameObject ParentTower;
+    public int[,] BuildingArray;
+
+    public void Awake()
+    {
+        BuildingArray = new int[13, 7];
+    }
 
     internal void BuildTower(Vector3 hitPoint)
     {
@@ -22,14 +28,18 @@ public class BuildingManager : MonoBehaviour
             return;
         }
 
-        // TODO:
-        // We can use the index to save the building in an array. See if it on already contains an tower, ect
+        if (BuildingArray[xIndex, zIndex] == 0)
+        {
+            BuildingArray[xIndex, zIndex] = 1;
+            float spawnX = (xIndex * 5f) - 30f;
+            float spawnZ = (zIndex * 5f) - 15f;
 
-
-        float spawnX = (xIndex * 5f) - 30f;
-        float spawnZ = (zIndex * 5f) - 15f;
-
-        var spawnLocation = new Vector3(spawnX, 0, spawnZ);
-        Instantiate(TowerPrefab, spawnLocation, Quaternion.identity, ParentTower.transform);
+            var spawnLocation = new Vector3(spawnX, 0, spawnZ);
+            Instantiate(TowerPrefab, spawnLocation, Quaternion.identity, ParentTower.transform);
+        }
+        else
+        {
+            Debug.Log("Already a building in this position");
+        }
     }
 }
