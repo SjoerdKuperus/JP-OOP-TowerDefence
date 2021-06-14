@@ -67,13 +67,28 @@ public class TowerUnit : MonoBehaviour
 
     internal virtual void Shoot()
     {
+        if(enemiesInRange.Count == 0)
+        {
+            //No enemies to shoot;
+            return;
+        }
+
         // Get the first enemy, and hit it
         var firstEnemy = enemiesInRange.First();
-        var isDestroyed = firstEnemy.Hit();
-        if(isDestroyed)
+        // Check if not already detroyed by other tower
+        if(firstEnemy == null)
         {
             enemiesInRange.Remove(firstEnemy);
+            Shoot(); //Try again on next target, if any are avaible.
         }
+        else
+        {
+            var isDestroyed = firstEnemy.Hit();
+            if (isDestroyed)
+            {
+                enemiesInRange.Remove(firstEnemy);
+            }
+        }        
     }
 
     public void SelectTower()

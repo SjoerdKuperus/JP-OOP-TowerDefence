@@ -19,7 +19,9 @@ public class MainManager : MonoBehaviour
     public Text LivesText;
     public Text TimeText;
     public SpawnManager SpawnManager;
+    public BuildingManager buildingManager;
     public Camera GameCamera;
+    public GameObject BuildGrid;
 
     private int lives = 3;
     private int score = 0;
@@ -27,6 +29,7 @@ public class MainManager : MonoBehaviour
     private bool inBuildTime;
     private int enemyWaveNumber = 0;
     private TowerUnit selectedTower = null;
+    private bool placingTower = false;
 
     private void Awake()
     {
@@ -71,7 +74,14 @@ public class MainManager : MonoBehaviour
         // User input
         if (Input.GetMouseButtonDown(0))
         {
-            HandleSelection();
+            if (placingTower)
+            {
+                PlaceTower();
+            }
+            else
+            {
+                HandleSelection();
+            }            
         }
 
         // Game state management
@@ -91,7 +101,7 @@ public class MainManager : MonoBehaviour
             inBuildTime = true;
             timeBeforeNextWave = 20;
         }
-    }
+    }   
 
     private bool AreEnemiesAllDead()
     {
@@ -107,10 +117,12 @@ public class MainManager : MonoBehaviour
 
     internal void ShowBuildingGridAndPlaceTower()
     {
-        // TODO:
         // Show a building grid.
+        BuildGrid.SetActive(true);
+        placingTower = true;
+
+        // TODO:
         // Create a see-through cannon tower, with visible range sphere.
-        // After a left click on the grid. Fix the tower position and activate it.
     }
 
     public void HandleSelection()
@@ -132,8 +144,36 @@ public class MainManager : MonoBehaviour
             }
             else
             {
-                selectedTower.DeselectTower();
+                if (selectedTower != null)
+                {
+                    selectedTower.DeselectTower();
+                }
             }
+        }
+    }
+
+    private void PlaceTower()
+    {
+        var ray = GameCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            var hitPoint = hit.point;
+            // Check if the point is inside the range of the buildings
+            if(hitPoint.x > -32.5 && hitPoint.x < 32.5)
+            {
+                if(hitPoint.z > 2.5 && hitPoint.z < 17.5)
+                {
+                    buildingManager.BuildTower(hitPoint);
+                }
+                if (hitPoint.z < -2.5 && hitPoint.z > -17.5)
+                {
+                    buildingManager.BuildTower(hitPoint);
+                }
+            }
+
+            placingTower = false;
+            BuildGrid.SetActive(false);
         }
     }
 }
