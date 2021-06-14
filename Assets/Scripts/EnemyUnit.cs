@@ -39,4 +39,11 @@ public class EnemyUnit : MonoBehaviour
         float step = speed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, goal.transform.position, step);
     }
+
+    internal bool Hit()
+    {
+        MainManager.Instance.IncreaseScore(5);
+        Destroy(gameObject);
+        return true;
+    }
 }

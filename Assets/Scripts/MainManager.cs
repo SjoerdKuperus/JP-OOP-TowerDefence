@@ -15,15 +15,18 @@ using UnityEngine.UI;
 public class MainManager : MonoBehaviour
 {
     public static MainManager Instance { get; private set; }
-    private int lives = 3;
-    private int score = 0;
-    private float timeBeforeNextWave = 20;
     public Text ScoreText;
     public Text LivesText;
     public Text TimeText;
+    public SpawnManager SpawnManager;
+    public Camera GameCamera;
+
+    private int lives = 3;
+    private int score = 0;
+    private float timeBeforeNextWave = 10;
     private bool inBuildTime;
     private int enemyWaveNumber = 0;
-    public SpawnManager SpawnManager;
+    private TowerUnit selectedTower = null;
 
     private void Awake()
     {
@@ -65,6 +68,13 @@ public class MainManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // User input
+        if (Input.GetMouseButtonDown(0))
+        {
+            HandleSelection();
+        }
+
+        // Game state management
         if (inBuildTime)
         {
             timeBeforeNextWave -= Time.deltaTime;
@@ -93,5 +103,37 @@ public class MainManager : MonoBehaviour
     {
         enemyWaveNumber++;
         SpawnManager.CreateNewWave(enemyWaveNumber);        
+    }
+
+    internal void ShowBuildingGridAndPlaceTower()
+    {
+        // TODO:
+        // Show a building grid.
+        // Create a see-through cannon tower, with visible range sphere.
+        // After a left click on the grid. Fix the tower position and activate it.
+    }
+
+    public void HandleSelection()
+    {
+        var ray = GameCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            //the collider could be children of the unit, so we make sure to check in the parent
+            var towerUnit = hit.collider.GetComponentInParent<TowerUnit>();
+            if (towerUnit != null)
+            {
+                if (selectedTower != null)
+                {
+                    selectedTower.DeselectTower();
+                }
+                selectedTower = towerUnit;
+                selectedTower.SelectTower();
+            }
+            else
+            {
+                selectedTower.DeselectTower();
+            }
+        }
     }
 }
