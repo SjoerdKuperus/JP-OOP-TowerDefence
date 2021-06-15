@@ -23,15 +23,18 @@ public class MainManager : MonoBehaviour
     public Camera GameCamera;
     public GameObject BuildGrid;
     public ParticleSystem DestroyExplosion;
+    public Canvas DefeatCanvas;
+    public Text DefeatCanvasWaveText;
+    public Text DefeatCanvasSccoreText;
 
-    private int lives = 3;
-    private int score = 0;
+    private int lives;
+    private int score;
     private float timeBetweenWaves = 10f;
     private float timeBeforeNextWave;
     private bool inBuildTime;
-    private int enemyWaveNumber = 0;
-    private TowerUnit selectedTower = null;
-    private bool placingTower = false;
+    private int enemyWaveNumber;
+    private TowerUnit selectedTower;
+    private bool placingTower;
 
     private void Awake()
     {
@@ -42,11 +45,25 @@ public class MainManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        LivesText.text = "Lives: " + lives;
-        ScoreText.text = "Score: " + score;
+        SetupNewGame();
+    }
+
+    public void SetupNewGame()
+    {
+        lives = 3;
+        score = 0;
+        enemyWaveNumber = 0;
+        selectedTower = null;
+        placingTower = false;
         inBuildTime = true;
         timeBeforeNextWave = timeBetweenWaves;
+        LivesText.text = "Lives: " + lives;
+        ScoreText.text = "Score: " + score;
         DestroyExplosion.Stop();
+        DefeatCanvas.gameObject.SetActive(false);
+        Time.timeScale = 1;
+        SpawnManager.RemoveAllEnemies();
+        buildingManager.RemoveAllTowers();
     }
 
     internal void StartDestroyAnimation(Vector3 position)
@@ -74,46 +91,52 @@ public class MainManager : MonoBehaviour
     private void GameOver()
     {
         Debug.Log("Game over!!");
-        //TODO: Show game over screen, with final score.
+        DefeatCanvasWaveText.text = "on wave " + enemyWaveNumber;
+        DefeatCanvasSccoreText.text = "Score: " + score;
+        DefeatCanvas.gameObject.SetActive(true);
+        Time.timeScale = 0;
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        // User input
-        if (Input.GetMouseButtonDown(0))
+        if(Time.timeScale == 1)
         {
-            if (placingTower)
+            // User input
+            if (Input.GetMouseButtonDown(0))
             {
-                PlaceTower();
+                if (placingTower)
+                {
+                    PlaceTower();
+                }
+                else
+                {
+                    HandleSelection();
+                }
+            }
+
+            // Game state management
+            if (inBuildTime)
+            {
+                timeBeforeNextWave -= Time.deltaTime;
+                if (timeBeforeNextWave <= 0)
+                {
+                    timeBeforeNextWave = 0;
+                    inBuildTime = false;
+                    SpawnNextWave();
+                }
+                TimeText.text = "Next wave in " + Math.Floor(timeBeforeNextWave) + " sec";
             }
             else
             {
-                HandleSelection();
-            }            
-        }
-
-        // Game state management
-        if (inBuildTime)
-        {
-            timeBeforeNextWave -= Time.deltaTime;
-            if (timeBeforeNextWave <= 0)
-            {
-                timeBeforeNextWave = 0;
-                inBuildTime = false;
-                SpawnNextWave();
+                if (AreEnemiesAllDead())
+                {
+                    inBuildTime = true;
+                    timeBeforeNextWave = timeBetweenWaves;
+                }
             }
-            TimeText.text = "Next wave in " + Math.Floor(timeBeforeNextWave) + " sec";
-        }
-        else
-        {
-            if (AreEnemiesAllDead())
-            {
-                inBuildTime = true;
-                timeBeforeNextWave = timeBetweenWaves;
-            }
-        }        
+        }            
     }
 
     private bool AreEnemiesAllDead()

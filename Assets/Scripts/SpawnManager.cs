@@ -24,4 +24,13 @@ public class SpawnManager : MonoBehaviour
     {
         Instantiate(EnemyPrefab, spawnLocation, Quaternion.identity, ParentEnemy.transform);
     }
+
+    internal void RemoveAllEnemies()
+    {
+        var allEnemies = GameObject.FindObjectsOfType<EnemyUnit>();
+        foreach(var enemy in allEnemies)
+        {
+            Destroy(enemy.gameObject);
+        }
+    }
 }

@@ -42,4 +42,16 @@ public class BuildingManager : MonoBehaviour
             Debug.Log("Already a building in this position");
         }
     }
+
+    internal void RemoveAllTowers()
+    {
+        var allTowers = GameObject.FindObjectsOfType<TowerUnit>();
+        foreach (var tower in allTowers)
+        {
+            Destroy(tower.gameObject);
+        }
+        
+        //Clean building array
+        BuildingArray = new int[13, 7];
+    }
 }
