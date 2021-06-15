@@ -22,7 +22,7 @@ public class MainManager : MonoBehaviour
     public BuildingManager buildingManager;
     public Camera GameCamera;
     public GameObject BuildGrid;
-    public ParticleSystem DestroyExplosion;
+    public ParticleSystem DestroyExplosionPrefab;
     public Canvas DefeatCanvas;
     public Text DefeatCanvasWaveText;
     public Text DefeatCanvasSccoreText;
@@ -60,7 +60,6 @@ public class MainManager : MonoBehaviour
         timeBeforeNextWave = timeBetweenWaves;
         LivesText.text = "Lives: " + lives;
         ScoreText.text = "Score: " + score;
-        DestroyExplosion.Stop();
         DefeatCanvas.gameObject.SetActive(false);
         PauseCanvas.gameObject.SetActive(false);
         Time.timeScale = 1;
@@ -70,8 +69,8 @@ public class MainManager : MonoBehaviour
 
     internal void StartDestroyAnimation(Vector3 position)
     {
-        DestroyExplosion.transform.position = position;
-        DestroyExplosion.Play();
+        var particleExplosion = Instantiate(DestroyExplosionPrefab, position, Quaternion.identity);
+        particleExplosion.Play();
     }
 
     internal void ReduceLives()
