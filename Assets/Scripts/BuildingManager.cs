@@ -4,6 +4,7 @@ using UnityEngine;
 public class BuildingManager : MonoBehaviour
 {
     public GameObject TowerPrefab;
+    public GameObject CannonTowerPrefab;
     public GameObject ParentTower;
     public int[,] BuildingArray;
 
@@ -12,7 +13,7 @@ public class BuildingManager : MonoBehaviour
         BuildingArray = new int[13, 7];
     }
 
-    internal void BuildTower(Vector3 hitPoint)
+    internal void BuildTower(Vector3 hitPoint, TowerType placingTowerType)
     {
         double positiveX = (32.5f + hitPoint.x); // The range is from -32.5 to 32.5.
         double xPosition = positiveX / 5;
@@ -35,15 +36,36 @@ public class BuildingManager : MonoBehaviour
             float spawnZ = (zIndex * 5f) - 15f;
 
             var spawnLocation = new Vector3(spawnX, 0, spawnZ);
-            if (MainManager.Instance.economyManager.ReduceMoney(50))
+            if (MainManager.Instance.economyManager.BuildTower(placingTowerType))
             {
-                Instantiate(TowerPrefab, spawnLocation, Quaternion.identity, ParentTower.transform);
+                CreateTower(placingTowerType, spawnLocation);
             }            
         }
         else
         {
             Debug.Log("Already a building in this position");
         }
+    }
+
+    private void CreateTower(TowerType placingTowerType, Vector3 spawnLocation)
+    {
+        GameObject prefabToPlace = null;
+        switch (placingTowerType)
+        {
+            case TowerType.CannonTower:
+                prefabToPlace = CannonTowerPrefab;
+                break;
+            case TowerType.BasicTower:
+                prefabToPlace = TowerPrefab;
+                break;
+            case TowerType.FreezeTower:
+            case TowerType.LightningTower:
+            case TowerType.PosionTower:
+            case TowerType.SpeedTower:
+                Debug.Log("Tower type not yet implemented");
+                break;
+        }
+        Instantiate(prefabToPlace, spawnLocation, Quaternion.identity, ParentTower.transform);
     }
 
     internal void RemoveAllTowers()

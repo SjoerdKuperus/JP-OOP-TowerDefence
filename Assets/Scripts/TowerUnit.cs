@@ -8,9 +8,17 @@ public class TowerUnit : MonoBehaviour
     private GameObject RangeIndicator;
 
     private bool towerIsSelected;
-    private List<EnemyUnit> enemiesInRange;
-    private bool InCooldown;
-    private float CoolDownTime = 0f;
+    protected List<EnemyUnit> enemiesInRange;
+    private bool inCooldown;
+    private float coolDownTime = 0f;
+
+    public virtual TowerType TowerType
+    {
+        get
+        {
+            return TowerType.BasicTower;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -18,25 +26,25 @@ public class TowerUnit : MonoBehaviour
         var rangeIndicatorMeshRenderer = RangeIndicator.GetComponent<MeshRenderer>();
         rangeIndicatorMeshRenderer.enabled = false;
         enemiesInRange = new List<EnemyUnit>();
-        InCooldown = false;
+        inCooldown = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (enemiesInRange.Count > 0 && !InCooldown)
+        if (enemiesInRange.Count > 0 && !inCooldown)
         {
             Shoot();
-            InCooldown = true;
-            CoolDownTime = 3.0f;
+            inCooldown = true;
+            coolDownTime = 3.0f;
 
         }
-        if (InCooldown)
+        if (inCooldown)
         {
-            CoolDownTime -= Time.deltaTime;
-            if (CoolDownTime <= 0)
+            coolDownTime -= Time.deltaTime;
+            if (coolDownTime <= 0)
             {
-                InCooldown = false;
+                inCooldown = false;
             }
         }
     }
@@ -83,8 +91,8 @@ public class TowerUnit : MonoBehaviour
         }
         else
         {
-            var isDestroyed = firstEnemy.Hit();
-            if (isDestroyed)
+            firstEnemy.Hit(5);
+            if (firstEnemy.IsDestroyed())
             {
                 enemiesInRange.Remove(firstEnemy);
             }
@@ -102,4 +110,14 @@ public class TowerUnit : MonoBehaviour
         var rangeIndicatorMeshRenderer = RangeIndicator.GetComponent<MeshRenderer>();
         rangeIndicatorMeshRenderer.enabled = false;
     }
+}
+
+public enum TowerType
+{
+    BasicTower = 0,
+    CannonTower = 1,
+    SpeedTower = 2,
+    PosionTower = 3,
+    FreezeTower = 4,
+    LightningTower = 5   
 }

@@ -6,11 +6,13 @@ public class EnemyUnit : MonoBehaviour
     private GameObject spawn;
     private GameObject goal;
     public float speed;
+    private int hitPoints;
 
     void Awake()
     {
         spawn = GameObject.Find("StartSpawn");
         goal = GameObject.Find("EndGoal");
+        hitPoints = 5;
     }
 
     // Update is called once per frame
@@ -23,6 +25,17 @@ public class EnemyUnit : MonoBehaviour
         if (Vector3.Distance(transform.position, goal.transform.position) < 0.001f)
         {
             ReachedGoal();
+        }
+    }
+
+    // Check if we got hit by towers. Then destroy.
+    private void LateUpdate()
+    {
+        if (hitPoints <= 0)
+        {
+            MainManager.Instance.IncreaseScore(5);
+            MainManager.Instance.StartDestroyAnimation(transform.position);
+            Destroy(gameObject);
         }
     }
 
@@ -39,17 +52,17 @@ public class EnemyUnit : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, goal.transform.position, step);
     }
 
-    internal bool Hit()
+    internal void Hit(int damage)
     {
         //Check position of the enemy. Should be invurable until passed the gate.
-        if(transform.position.x < -35)
+        if (transform.position.x > -35)
         {
-            return false;
+            hitPoints = -damage;
         }
+    }
 
-        MainManager.Instance.IncreaseScore(5);
-        MainManager.Instance.StartDestroyAnimation(transform.position);
-        Destroy(gameObject);
-        return true;
+    internal bool IsDestroyed()
+    {
+        return hitPoints <= 0;
     }
 }
