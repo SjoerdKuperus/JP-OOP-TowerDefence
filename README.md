@@ -15,14 +15,14 @@ The game has the abstraction, encapsulation, inheritance and polymorphism pillar
 - [x] Mouse selection of towers (show range indicator when selected)
 - [x] Place towers in a grid (13 colums, 7 rows) middle row is reserved for the path.
 - [x] Explosion effect after enemy destroyed.
+- [x] Start/Menu scene.
+- [x] Defeat overlay.
+- [x] Pauze overlay. Should also be able to quit game.
+- [x] Tower build cost and economy system.
+- [x] Enemy hit point system.
+- [x] Refactor base tower into a cannon tower: long cooldown, high damage and medium range.
 
 ### TODO: ###
-- [ ] Start/Menu scene.
-- [ ] Defeat overlay.
-- [ ] Pauze overlay. Should also be able to quit game.
-- [ ] Tower build cost and economy system.
-- [ ] Enemy hit point system.
-- [ ] Refactor base tower into a cannon tower: long cooldown, high damage and medium range.
 - [ ] Speed tower: Low cooldown, low damage, high range.
 - [ ] Posion tower: Status effect on enemies, take damage over time. Low cooldown, low damage, low range.
 - [ ] Freeze tower: Slow enemies, low damage, medium range.
