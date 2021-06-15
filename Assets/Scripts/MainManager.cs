@@ -26,6 +26,7 @@ public class MainManager : MonoBehaviour
     public Canvas DefeatCanvas;
     public Text DefeatCanvasWaveText;
     public Text DefeatCanvasSccoreText;
+    public Canvas PauseCanvas;
 
     private int lives;
     private int score;
@@ -61,6 +62,7 @@ public class MainManager : MonoBehaviour
         ScoreText.text = "Score: " + score;
         DestroyExplosion.Stop();
         DefeatCanvas.gameObject.SetActive(false);
+        PauseCanvas.gameObject.SetActive(false);
         Time.timeScale = 1;
         SpawnManager.RemoveAllEnemies();
         buildingManager.RemoveAllTowers();
@@ -211,5 +213,17 @@ public class MainManager : MonoBehaviour
             placingTower = false;
             BuildGrid.SetActive(false);
         }
+    }
+
+    internal void PauseGameAndShowSettings()
+    {
+        Time.timeScale = 0;
+        PauseCanvas.gameObject.SetActive(true);
+    }
+
+    internal void ContinueGame()
+    {
+        Time.timeScale = 1;
+        PauseCanvas.gameObject.SetActive(false);
     }
 }

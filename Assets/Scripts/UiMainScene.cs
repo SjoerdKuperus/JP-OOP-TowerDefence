@@ -6,4 +6,9 @@ public class UiMainScene : MonoBehaviour
     {
         MainManager.Instance.ShowBuildingGridAndPlaceTower();
     }
+
+    public void SettingsClicked()
+    {
+        MainManager.Instance.PauseGameAndShowSettings();
+    }
 }
