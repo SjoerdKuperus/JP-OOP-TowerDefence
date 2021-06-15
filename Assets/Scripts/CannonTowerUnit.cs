@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class CannonTowerUnit : TowerUnit
 {
+    public GameObject CannonballPrefab;
+    private GameObject ProjectilesParrent;
+    public float force = 8f;
+
+    public void Awake()
+    {
+        ProjectilesParrent = GameObject.Find("Projectiles");
+    }
+
     public override TowerType TowerType
     {
         get
@@ -19,7 +28,36 @@ public class CannonTowerUnit : TowerUnit
             //No enemies to shoot;
             return;
         }
-        //Launce projectile towards target.
-        Debug.Log("Cannon tower shoots!");
+        // Get the first enemy, and hit it
+        var firstEnemy = enemiesInRange.First();
+        // Check if not already detroyed by other tower
+        if (firstEnemy == null)
+        {
+            enemiesInRange.Remove(firstEnemy);
+            Shoot(); //Try again on next target, if any are avaible.
+        }
+        else
+        {
+            //Launch projectile towards target.
+            var towerTop = new Vector3(transform.position.x, 5, transform.position.z);
+            var ball = Instantiate(CannonballPrefab, towerTop, Quaternion.identity, ProjectilesParrent.transform);
+            Vector3 shootVector = GetBallisticVector(firstEnemy.transform.position, 45);
+
+            ball.GetComponent<Rigidbody>().AddForce(Vector3.Normalize(shootVector) * force, ForceMode.Impulse);
+        }      
+    }
+
+    private Vector3 GetBallisticVector(Vector3 targetPosition, float angle)
+    {
+        var dir = targetPosition - transform.position;  // get target direction
+        var h = dir.y;  // get height difference
+        dir.y = 0;  // retain only the horizontal direction
+        var dist = dir.magnitude;  // get horizontal distance
+        var a = angle * Mathf.Deg2Rad;  // convert angle to radians
+        dir.y = dist * Mathf.Tan(a);  // set dir to the elevation angle
+        dist += h / Mathf.Tan(a);  // correct for small height differences
+        // calculate the velocity magnitude
+        var vel = Mathf.Sqrt(dist * Physics.gravity.magnitude / Mathf.Sin(2 * a));
+        return vel * dir.normalized;
     }
 }

@@ -19,8 +19,8 @@ public class MainManager : MonoBehaviour
     public Text LivesText;
     public Text TimeText;
     public SpawnManager SpawnManager;
-    public BuildingManager buildingManager;
-    public EconomyManager economyManager;
+    public BuildingManager BuildingManager;
+    public EconomyManager EconomyManager;
     public Camera GameCamera;
     public GameObject BuildGrid;
     public ParticleSystem DestroyExplosionPrefab;
@@ -67,9 +67,10 @@ public class MainManager : MonoBehaviour
         PauseCanvas.gameObject.SetActive(false);
         Time.timeScale = 1;
         SpawnManager.RemoveAllEnemies();
-        buildingManager.RemoveAllTowers();
-        economyManager.SetupGame();
-    }
+        BuildingManager.RemoveAllTowers();
+        EconomyManager.SetupGame();
+        RemoveAllProjectiles();
+    }    
 
     internal void StartDestroyAnimation(Vector3 position)
     {
@@ -91,7 +92,7 @@ public class MainManager : MonoBehaviour
     {
         score += points;
         ScoreText.text = "Score: " + score;
-        economyManager.AddMoney(points);
+        EconomyManager.AddMoney(points);
     }
 
     private void GameOver()
@@ -207,11 +208,11 @@ public class MainManager : MonoBehaviour
             {
                 if(hitPoint.z > 2.5 && hitPoint.z < 17.5)
                 {
-                    buildingManager.BuildTower(hitPoint, placingTowerType);
+                    BuildingManager.BuildTower(hitPoint, placingTowerType);
                 }
                 if (hitPoint.z < -2.5 && hitPoint.z > -17.5)
                 {
-                    buildingManager.BuildTower(hitPoint, placingTowerType);
+                    BuildingManager.BuildTower(hitPoint, placingTowerType);
                 }
             }
 
@@ -230,5 +231,14 @@ public class MainManager : MonoBehaviour
     {
         Time.timeScale = 1;
         PauseCanvas.gameObject.SetActive(false);
+    }
+
+    private void RemoveAllProjectiles()
+    {
+        var allProjectiles = GameObject.FindObjectsOfType<ProjectileUnit>();
+        foreach (var projectile in allProjectiles)
+        {
+            Destroy(projectile.gameObject);
+        }
     }
 }

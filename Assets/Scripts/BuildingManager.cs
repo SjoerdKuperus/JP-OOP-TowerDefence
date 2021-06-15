@@ -36,7 +36,7 @@ public class BuildingManager : MonoBehaviour
             float spawnZ = (zIndex * 5f) - 15f;
 
             var spawnLocation = new Vector3(spawnX, 0, spawnZ);
-            if (MainManager.Instance.economyManager.BuildTower(placingTowerType))
+            if (MainManager.Instance.EconomyManager.BuildTower(placingTowerType))
             {
                 CreateTower(placingTowerType, spawnLocation);
             }            
