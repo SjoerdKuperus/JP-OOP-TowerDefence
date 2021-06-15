@@ -35,7 +35,10 @@ public class BuildingManager : MonoBehaviour
             float spawnZ = (zIndex * 5f) - 15f;
 
             var spawnLocation = new Vector3(spawnX, 0, spawnZ);
-            Instantiate(TowerPrefab, spawnLocation, Quaternion.identity, ParentTower.transform);
+            if (MainManager.Instance.economyManager.ReduceMoney(50))
+            {
+                Instantiate(TowerPrefab, spawnLocation, Quaternion.identity, ParentTower.transform);
+            }            
         }
         else
         {

@@ -20,6 +20,7 @@ public class MainManager : MonoBehaviour
     public Text TimeText;
     public SpawnManager SpawnManager;
     public BuildingManager buildingManager;
+    public EconomyManager economyManager;
     public Camera GameCamera;
     public GameObject BuildGrid;
     public ParticleSystem DestroyExplosionPrefab;
@@ -65,6 +66,7 @@ public class MainManager : MonoBehaviour
         Time.timeScale = 1;
         SpawnManager.RemoveAllEnemies();
         buildingManager.RemoveAllTowers();
+        economyManager.SetupGame();
     }
 
     internal void StartDestroyAnimation(Vector3 position)
@@ -87,6 +89,7 @@ public class MainManager : MonoBehaviour
     {
         score += points;
         ScoreText.text = "Score: " + score;
+        economyManager.AddMoney(points);
     }
 
     private void GameOver()
