@@ -20,20 +20,23 @@ The game has the abstraction, encapsulation, inheritance and polymorphism pillar
 - [x] Pauze overlay. Should also be able to quit game.
 - [x] Tower build cost and economy system.
 - [x] Enemy hit point system.
-- [x] Refactor base tower into a cannon tower: long cooldown, high damage and medium range.
+- [x] Refactor base tower into a shooting tower: long cooldown, high damage and medium range.
+- [x] Cannon tower: Shoot cannonball with balistic trajectory. Does damage on inpact (on hit or in splash range).
+- [x] Posion tower: Status effect on enemies, take damage over time. Low cooldown, low damage, low range.
+- [x] Enemy health bars.
+- [x] Different enemy types (easy, medium, hard) with different speed/hitpoints.
 
 ### TODO: ###
 - [ ] Speed tower: Low cooldown, low damage, high range.
-- [ ] Posion tower: Status effect on enemies, take damage over time. Low cooldown, low damage, low range.
 - [ ] Freeze tower: Slow enemies, low damage, medium range.
 - [ ] Lightning tower: Fire in a line, long range.
-- [ ] Enemy types (immune to damage type)
 - [ ] Music during play.
 - [ ] Sound effect when fire of tower, enemy destroyed.
 - [ ] Show highscores on main menu
 - [ ] Show help information on main menu.
 
 ### For the future: ###
-- [ ] Dynamic path, turns
-- [ ] Tower upgrade system
+- [ ] Dynamic path, turns.
+- [ ] Sell towers.
+- [ ] Tower upgrade system.
 - [ ] Replace all models with high poly prefabs.
