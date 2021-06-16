@@ -5,7 +5,10 @@ public class EnemyUnit : MonoBehaviour
 {
     private GameObject spawn;
     private GameObject goal;
+    [SerializeField]
+    private GameObject healthbar;
     public float speed;
+    private float maxHitPoints;
     private float hitPoints;
     private bool isPoisoned;
     private float hitPointLossPerSecond;
@@ -14,7 +17,28 @@ public class EnemyUnit : MonoBehaviour
     {
         spawn = GameObject.Find("StartSpawn");
         goal = GameObject.Find("EndGoal");
+        maxHitPoints = 5.0f;
         hitPoints = 5.0f;
+        UpdateHealtBar();
+    }
+
+    private void UpdateHealtBar()
+    {
+        var healthBarRenderer = healthbar.GetComponent<Renderer>();
+        if(maxHitPoints == hitPoints)
+        {
+            healthBarRenderer.material.color = Color.green;
+        }
+        else if ((maxHitPoints / 2) < hitPoints)
+        {
+            healthBarRenderer.material.color = Color.yellow;
+        }
+        else
+        {
+            healthBarRenderer.material.color = Color.red;
+        }
+        healthbar.transform.localScale = new Vector3((hitPoints / maxHitPoints), 0.1f, 0.2f);
+        healthbar.transform.localPosition = new Vector3((1 - (hitPoints / maxHitPoints)) / 2, 0.45f, 0.6f);
     }
 
     // Update is called once per frame
@@ -36,7 +60,9 @@ public class EnemyUnit : MonoBehaviour
         if(isPoisoned)
         {
             hitPoints -= hitPointLossPerSecond * Time.deltaTime;
-        }    
+        }
+
+        UpdateHealtBar();
 
         if (hitPoints <= 0)
         {
