@@ -5,6 +5,8 @@ It is the last mission checkpoint of the Unity Learn Junior Pathway. [Unity Lear
 
 The game has the abstraction, encapsulation, inheritance and polymorphism pillars of Object Oriented Programming.
 
+You can play the game at [Link](https://play.unity.com/mg/other/builds-5h-2)
+
 ## Task list: ##
 - [x] Create a basic scene with ground a path, setup topdown view camera.
 - [x] Base enemy, moves toward its goal.
