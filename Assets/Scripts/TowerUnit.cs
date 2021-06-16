@@ -132,7 +132,7 @@ public enum TowerType
     BasicTower = 0,
     CannonTower = 1,
     SpeedTower = 2,
-    PosionTower = 3,
+    PoisonTower = 3,
     FreezeTower = 4,
     LightningTower = 5   
 }

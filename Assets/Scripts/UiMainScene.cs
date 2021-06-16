@@ -12,9 +12,9 @@ public class UiMainScene : MonoBehaviour
         MainManager.Instance.ShowBuildingGridAndPlaceTower(TowerType.BasicTower);
     }
 
-    public void PosionTowerClicked()
+    public void PoisonTowerClicked()
     {
-        MainManager.Instance.ShowBuildingGridAndPlaceTower(TowerType.PosionTower);
+        MainManager.Instance.ShowBuildingGridAndPlaceTower(TowerType.PoisonTower);
     }
 
     public void SettingsClicked()

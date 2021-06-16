@@ -5,7 +5,7 @@ public class BuildingManager : MonoBehaviour
 {
     public GameObject BasicTowerPrefab;
     public GameObject CannonTowerPrefab;
-    public GameObject PosionTowerPrefab;
+    public GameObject PoisonTowerPrefab;
     public GameObject ParentTower;
     public int[,] BuildingArray;
 
@@ -76,8 +76,8 @@ public class BuildingManager : MonoBehaviour
             case TowerType.BasicTower:
                 towerPrefab = BasicTowerPrefab.GetComponent<TowerUnit>();
                 break;
-            case TowerType.PosionTower:
-                towerPrefab = PosionTowerPrefab.GetComponent<PoisonTowerUnit>();
+            case TowerType.PoisonTower:
+                towerPrefab = PoisonTowerPrefab.GetComponent<PoisonTowerUnit>();
                 break;
             case TowerType.FreezeTower:
             case TowerType.LightningTower:            

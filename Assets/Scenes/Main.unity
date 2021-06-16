@@ -1495,7 +1495,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Posion tower (100$)
+  m_Text: Poison tower (100$)
 --- !u!222 &485415898
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1517,7 +1517,7 @@ GameObject:
   - component: {fileID: 486444409}
   - component: {fileID: 486444408}
   m_Layer: 5
-  m_Name: PosionTower
+  m_Name: PoisonTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1589,7 +1589,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1247759348}
         m_TargetAssemblyTypeName: UiMainScene, Assembly-CSharp
-        m_MethodName: PosionTowerClicked
+        m_MethodName: PoisonTowerClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2510,7 +2510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BasicTowerPrefab: {fileID: 8677681977995131442, guid: 523eb316c237b3e4e86d9a9c2b912040, type: 3}
   CannonTowerPrefab: {fileID: 8677681977995131442, guid: 88ea98a8164958546ae9b8092d2d6ae2, type: 3}
-  PosionTowerPrefab: {fileID: 8677681977995131442, guid: bcba42e41d8108444ba6491ffdce3d18, type: 3}
+  PoisonTowerPrefab: {fileID: 8677681977995131442, guid: bcba42e41d8108444ba6491ffdce3d18, type: 3}
   ParentTower: {fileID: 2082936873}
 --- !u!4 &903379860
 Transform:

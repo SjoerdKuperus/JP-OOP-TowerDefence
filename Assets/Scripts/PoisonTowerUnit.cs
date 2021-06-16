@@ -8,7 +8,7 @@ public class PoisonTowerUnit : TowerUnit
     {
         get
         {
-            return TowerType.PosionTower;
+            return TowerType.PoisonTower;
         }
     }
 
