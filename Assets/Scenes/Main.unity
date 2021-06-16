@@ -3309,7 +3309,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00df8b523b225b94fb1a8ef6e9251039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyPrefab: {fileID: 7927512914618033179, guid: 803ce603a926ebb4fbd134437315e501, type: 3}
+  EasyEnemyPrefab: {fileID: 7927512914618033179, guid: c8c7d5007a07ce840aa4dfa03625922c, type: 3}
+  MediumEnemyPrefab: {fileID: 7927512914618033179, guid: f7edf27ae7ace8a42ac7c36e0b7a847b, type: 3}
+  HardEnemyPrefab: {fileID: 7927512914618033179, guid: 7df580a4400da3c4abf8d41d9a2dd00f, type: 3}
   ParentEnemy: {fileID: 504670689}
 --- !u!4 &1258301732
 Transform:

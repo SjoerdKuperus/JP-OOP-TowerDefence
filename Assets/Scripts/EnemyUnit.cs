@@ -8,7 +8,7 @@ public class EnemyUnit : MonoBehaviour
     [SerializeField]
     private GameObject healthbar;
     public float speed;
-    private float maxHitPoints;
+    public float maxHitPoints;
     private float hitPoints;
     private bool isPoisoned;
     private float hitPointLossPerSecond;
@@ -17,8 +17,7 @@ public class EnemyUnit : MonoBehaviour
     {
         spawn = GameObject.Find("StartSpawn");
         goal = GameObject.Find("EndGoal");
-        maxHitPoints = 5.0f;
-        hitPoints = 5.0f;
+        hitPoints = maxHitPoints;
         UpdateHealtBar();
     }
 
@@ -96,7 +95,7 @@ public class EnemyUnit : MonoBehaviour
         //Check position of the enemy. Should be invurable until passed the gate.
         if (transform.position.x > -35)
         {
-            hitPoints = -damage;
+            hitPoints -= damage;
         }
     }
 
