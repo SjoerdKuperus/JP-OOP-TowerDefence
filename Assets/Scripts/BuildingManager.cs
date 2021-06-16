@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BuildingManager : MonoBehaviour
 {
-    public GameObject TowerPrefab;
+    public GameObject BasicTowerPrefab;
     public GameObject CannonTowerPrefab;
     public GameObject ParentTower;
     public int[,] BuildingArray;
@@ -13,7 +13,7 @@ public class BuildingManager : MonoBehaviour
         BuildingArray = new int[13, 7];
     }
 
-    internal void BuildTower(Vector3 hitPoint, TowerType placingTowerType)
+    internal void BuildTower(Vector3 hitPoint, TowerUnit towerUnit)
     {
         double positiveX = (32.5f + hitPoint.x); // The range is from -32.5 to 32.5.
         double xPosition = positiveX / 5;
@@ -36,9 +36,9 @@ public class BuildingManager : MonoBehaviour
             float spawnZ = (zIndex * 5f) - 15f;
 
             var spawnLocation = new Vector3(spawnX, 0, spawnZ);
-            if (MainManager.Instance.EconomyManager.BuildTower(placingTowerType))
+            if (MainManager.Instance.EconomyManager.BuildTower(towerUnit))
             {
-                CreateTower(placingTowerType, spawnLocation);
+                CreateTower(towerUnit, spawnLocation);
             }            
         }
         else
@@ -47,25 +47,9 @@ public class BuildingManager : MonoBehaviour
         }
     }
 
-    private void CreateTower(TowerType placingTowerType, Vector3 spawnLocation)
+    private void CreateTower(TowerUnit placingTowerType, Vector3 spawnLocation)
     {
-        GameObject prefabToPlace = null;
-        switch (placingTowerType)
-        {
-            case TowerType.CannonTower:
-                prefabToPlace = CannonTowerPrefab;
-                break;
-            case TowerType.BasicTower:
-                prefabToPlace = TowerPrefab;
-                break;
-            case TowerType.FreezeTower:
-            case TowerType.LightningTower:
-            case TowerType.PosionTower:
-            case TowerType.SpeedTower:
-                Debug.Log("Tower type not yet implemented");
-                break;
-        }
-        Instantiate(prefabToPlace, spawnLocation, Quaternion.identity, ParentTower.transform);
+        Instantiate(placingTowerType.gameObject, spawnLocation, Quaternion.identity, ParentTower.transform);
     }
 
     internal void RemoveAllTowers()
@@ -78,5 +62,26 @@ public class BuildingManager : MonoBehaviour
         
         //Clean building array
         BuildingArray = new int[13, 7];
+    }
+
+    internal TowerUnit GetTowerUnitFromTowerType(TowerType towerType)
+    {
+        TowerUnit towerPrefab = null;
+        switch (towerType)
+        {
+            case TowerType.CannonTower:
+                towerPrefab = CannonTowerPrefab.GetComponent<CannonTowerUnit>();
+                break;
+            case TowerType.BasicTower:
+                towerPrefab = BasicTowerPrefab.GetComponent<TowerUnit>();
+                break;
+            case TowerType.FreezeTower:
+            case TowerType.LightningTower:
+            case TowerType.PosionTower:
+            case TowerType.SpeedTower:
+                Debug.Log("Tower type not yet implemented");
+                break;
+        }
+        return towerPrefab;
     }
 }

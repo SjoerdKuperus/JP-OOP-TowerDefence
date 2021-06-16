@@ -37,7 +37,7 @@ public class MainManager : MonoBehaviour
     private int enemyWaveNumber;
     private TowerUnit selectedTower;
     private bool placingTower;
-    private TowerType placingTowerType;
+    private TowerUnit placingTowerUnit;
 
     private void Awake()
     {
@@ -58,7 +58,7 @@ public class MainManager : MonoBehaviour
         enemyWaveNumber = 0;
         selectedTower = null;
         placingTower = false;
-        placingTowerType = TowerType.BasicTower;
+        placingTowerUnit = null;
         inBuildTime = true;
         timeBeforeNextWave = timeBetweenWaves;
         LivesText.text = "Lives: " + lives;
@@ -163,7 +163,7 @@ public class MainManager : MonoBehaviour
         // Show a building grid.
         BuildGrid.SetActive(true);
         placingTower = true;
-        placingTowerType = towerType;
+        placingTowerUnit = BuildingManager.GetTowerUnitFromTowerType(towerType);
 
         // TODO:
         // Create a see-through cannon tower, with visible range sphere.
@@ -208,11 +208,11 @@ public class MainManager : MonoBehaviour
             {
                 if(hitPoint.z > 2.5 && hitPoint.z < 17.5)
                 {
-                    BuildingManager.BuildTower(hitPoint, placingTowerType);
+                    BuildingManager.BuildTower(hitPoint, placingTowerUnit);
                 }
                 if (hitPoint.z < -2.5 && hitPoint.z > -17.5)
                 {
-                    BuildingManager.BuildTower(hitPoint, placingTowerType);
+                    BuildingManager.BuildTower(hitPoint, placingTowerUnit);
                 }
             }
 

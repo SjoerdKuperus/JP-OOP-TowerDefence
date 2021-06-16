@@ -36,24 +36,8 @@ public class EconomyManager : MonoBehaviour
         moneyText.text = money + "$";
     }
 
-    internal bool BuildTower(TowerType placingTowerType)
+    internal bool BuildTower(TowerUnit towerUnit)
     {
-        int towerCost = 0;
-        switch (placingTowerType)
-        {
-            case TowerType.CannonTower:
-                towerCost = 50;
-                break;
-            case TowerType.BasicTower:
-                towerCost = 25;
-                break;
-            case TowerType.FreezeTower:
-            case TowerType.LightningTower:
-            case TowerType.PosionTower:
-            case TowerType.SpeedTower:
-                Debug.Log("Tower type not yet implemented");
-                break;
-        }
-        return ReduceMoney(towerCost);
+        return ReduceMoney(towerUnit.GetCost());
     }
 }

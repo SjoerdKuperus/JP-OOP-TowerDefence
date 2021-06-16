@@ -21,6 +21,11 @@ public class CannonTowerUnit : TowerUnit
         }
     }
 
+    public override int GetCost()
+    {
+        return 50;
+    }
+
     internal override void Shoot()
     {
         if (enemiesInRange.Count == 0)
@@ -41,16 +46,16 @@ public class CannonTowerUnit : TowerUnit
             //Launch projectile towards target.
             var towerTop = new Vector3(transform.position.x, 5, transform.position.z);
             var ball = Instantiate(CannonballPrefab, towerTop, Quaternion.identity, ProjectilesParrent.transform);
-            Vector3 shootVector = GetBallisticVector(firstEnemy.transform.position, 45);
+            Vector3 shootVector = GetBallisticVector(firstEnemy.transform.position, ball.transform.position, 45);
 
-            ball.GetComponent<Rigidbody>().AddForce(Vector3.Normalize(shootVector) * force, ForceMode.Impulse);
+            ball.GetComponent<Rigidbody>().AddForce(shootVector, ForceMode.Impulse);
         }      
     }
 
-    private Vector3 GetBallisticVector(Vector3 targetPosition, float angle)
+    private Vector3 GetBallisticVector(Vector3 targetPosition, Vector3 ownPosition, float angle)
     {
-        var dir = targetPosition - transform.position;  // get target direction
-        var h = dir.y;  // get height difference
+        var dir = targetPosition - ownPosition;  // get target direction
+        var h = dir.y;  // get height difference 
         dir.y = 0;  // retain only the horizontal direction
         var dist = dir.magnitude;  // get horizontal distance
         var a = angle * Mathf.Deg2Rad;  // convert angle to radians

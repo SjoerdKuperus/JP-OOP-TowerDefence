@@ -29,6 +29,11 @@ public class TowerUnit : MonoBehaviour
         inCooldown = false;
     }
 
+    public virtual int GetCost()
+    {
+        return 25;
+    }
+
     // Update is called once per frame
     void Update()
     {
