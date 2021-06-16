@@ -8,6 +8,8 @@ public class TowerUnit : MonoBehaviour
     private GameObject RangeIndicator;
     [SerializeField]
     private ParticleSystem SmokeShotParticle;
+    [SerializeField]
+    private float shootCooldown;
 
     private bool towerIsSelected;
     protected List<EnemyUnit> enemiesInRange;
@@ -47,7 +49,7 @@ public class TowerUnit : MonoBehaviour
         {
             Shoot();
             inCooldown = true;
-            coolDownTime = 3.0f;
+            coolDownTime = shootCooldown;
 
         }
         if (inCooldown)

@@ -1694,8 +1694,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RangeIndicator: {fileID: 3616383142085042852}
+  SmokeShotParticle: {fileID: 0}
+  shootCooldown: 2.5
   CannonballPrefab: {fileID: 694669542787598606, guid: eb391aa8f649c6040a37302150dbd6d6, type: 3}
-  force: 8
 --- !u!1 &8840514039975579989
 GameObject:
   m_ObjectHideFlags: 0

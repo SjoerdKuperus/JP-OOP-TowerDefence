@@ -126,5 +126,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProjectileDamage: 10
-  SplashDamage: 8
-  SpashRadius: 4
+  SplashDamage: 6
+  SpashRadius: 3

@@ -5,6 +5,7 @@ public class BuildingManager : MonoBehaviour
 {
     public GameObject BasicTowerPrefab;
     public GameObject CannonTowerPrefab;
+    public GameObject PosionTowerPrefab;
     public GameObject ParentTower;
     public int[,] BuildingArray;
 
@@ -75,9 +76,11 @@ public class BuildingManager : MonoBehaviour
             case TowerType.BasicTower:
                 towerPrefab = BasicTowerPrefab.GetComponent<TowerUnit>();
                 break;
-            case TowerType.FreezeTower:
-            case TowerType.LightningTower:
             case TowerType.PosionTower:
+                towerPrefab = PosionTowerPrefab.GetComponent<PoisonTowerUnit>();
+                break;
+            case TowerType.FreezeTower:
+            case TowerType.LightningTower:            
             case TowerType.SpeedTower:
                 Debug.Log("Tower type not yet implemented");
                 break;

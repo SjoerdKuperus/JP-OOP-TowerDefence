@@ -6,13 +6,15 @@ public class EnemyUnit : MonoBehaviour
     private GameObject spawn;
     private GameObject goal;
     public float speed;
-    private int hitPoints;
+    private float hitPoints;
+    private bool isPoisoned;
+    private float hitPointLossPerSecond;
 
     void Awake()
     {
         spawn = GameObject.Find("StartSpawn");
         goal = GameObject.Find("EndGoal");
-        hitPoints = 5;
+        hitPoints = 5.0f;
     }
 
     // Update is called once per frame
@@ -31,6 +33,11 @@ public class EnemyUnit : MonoBehaviour
     // Check if we got hit by towers. Then destroy.
     private void LateUpdate()
     {
+        if(isPoisoned)
+        {
+            hitPoints -= hitPointLossPerSecond * Time.deltaTime;
+        }    
+
         if (hitPoints <= 0)
         {
             MainManager.Instance.IncreaseScore(5);
@@ -43,6 +50,12 @@ public class EnemyUnit : MonoBehaviour
     {
         MainManager.Instance.ReduceLives();
         Destroy(gameObject);
+    }
+
+    internal void AddPoisonEffect(float _hitPointLossPerSecond)
+    {
+        isPoisoned = true;
+        hitPointLossPerSecond = _hitPointLossPerSecond;
     }
 
     internal virtual void Move()

@@ -12,6 +12,11 @@ public class UiMainScene : MonoBehaviour
         MainManager.Instance.ShowBuildingGridAndPlaceTower(TowerType.BasicTower);
     }
 
+    public void PosionTowerClicked()
+    {
+        MainManager.Instance.ShowBuildingGridAndPlaceTower(TowerType.PosionTower);
+    }
+
     public void SettingsClicked()
     {
         MainManager.Instance.PauseGameAndShowSettings();
