@@ -38,3 +38,5 @@ sysinfo.txt
 *.log
 *.log
 Logs/ApiUpdaterCheck.txt
+connectwebgl.zip
+webgl_sharing
