@@ -6,7 +6,6 @@ public class CannonTowerUnit : TowerUnit
 {
     public GameObject CannonballPrefab;
     private GameObject ProjectilesParrent;
-    public float force = 8f;
 
     public void Awake()
     {

@@ -6,11 +6,13 @@ public class TowerUnit : MonoBehaviour
 {
     [SerializeField]
     private GameObject RangeIndicator;
+    [SerializeField]
+    private ParticleSystem SmokeShotParticle;
 
     private bool towerIsSelected;
     protected List<EnemyUnit> enemiesInRange;
     private bool inCooldown;
-    private float coolDownTime = 0f;
+    private float coolDownTime = 0f;    
 
     public virtual TowerType TowerType
     {
@@ -27,6 +29,10 @@ public class TowerUnit : MonoBehaviour
         rangeIndicatorMeshRenderer.enabled = false;
         enemiesInRange = new List<EnemyUnit>();
         inCooldown = false;
+        if(SmokeShotParticle != null)
+        {
+            SmokeShotParticle.Stop();
+        }        
     }
 
     public virtual int GetCost()
@@ -96,6 +102,8 @@ public class TowerUnit : MonoBehaviour
         }
         else
         {
+            SmokeShotParticle.transform.LookAt(firstEnemy.transform);
+            SmokeShotParticle.Play();
             firstEnemy.Hit(5);
             if (firstEnemy.IsDestroyed())
             {

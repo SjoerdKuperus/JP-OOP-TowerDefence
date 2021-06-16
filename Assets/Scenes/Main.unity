@@ -2295,7 +2295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bfd3303da3e10741a50e95ba5d1dd9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerPrefab: {fileID: 8677681977995131442, guid: 523eb316c237b3e4e86d9a9c2b912040, type: 3}
+  BasicTowerPrefab: {fileID: 8677681977995131442, guid: 523eb316c237b3e4e86d9a9c2b912040, type: 3}
   CannonTowerPrefab: {fileID: 8677681977995131442, guid: 88ea98a8164958546ae9b8092d2d6ae2, type: 3}
   ParentTower: {fileID: 2082936873}
 --- !u!4 &903379860
@@ -4159,7 +4159,7 @@ MonoBehaviour:
   EconomyManager: {fileID: 1986287646}
   GameCamera: {fileID: 963194227}
   BuildGrid: {fileID: 819357696}
-  DestroyExplosionPrefab: {fileID: 2033524936677837111, guid: 1f67853f3560e904b94df9dfd92e1230, type: 3}
+  DestroyExplosionPrefab: {fileID: 2033524936677837111, guid: 323d64a7f1b343e4b946428af8dd8c7a, type: 3}
   DefeatCanvas: {fileID: 1233770127}
   DefeatCanvasWaveText: {fileID: 1615410681}
   DefeatCanvasSccoreText: {fileID: 44140902}
