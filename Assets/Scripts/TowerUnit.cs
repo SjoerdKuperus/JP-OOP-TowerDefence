@@ -129,10 +129,11 @@ public class TowerUnit : MonoBehaviour
 
 public enum TowerType
 {
-    BasicTower = 0,
-    CannonTower = 1,
-    SpeedTower = 2,
-    PoisonTower = 3,
-    FreezeTower = 4,
-    LightningTower = 5   
+    None = 0,
+    BasicTower = 1,
+    CannonTower = 2,
+    SpeedTower = 3,
+    PoisonTower = 4,
+    FreezeTower = 5,
+    LightningTower = 6
 }

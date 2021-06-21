@@ -30,15 +30,14 @@ public class BuildingManager : MonoBehaviour
             return;
         }
 
-        if (BuildingArray[xIndex, zIndex] == 0)
+        if (BuildingArray[xIndex, zIndex] == (int)TowerType.None)
         {
-            BuildingArray[xIndex, zIndex] = 1;
-            float spawnX = (xIndex * 5f) - 30f;
-            float spawnZ = (zIndex * 5f) - 15f;
-
-            var spawnLocation = new Vector3(spawnX, 0, spawnZ);
             if (MainManager.Instance.EconomyManager.BuildTower(towerUnit))
             {
+                BuildingArray[xIndex, zIndex] = (int)towerUnit.TowerType;
+                float spawnX = (xIndex * 5f) - 30f;
+                float spawnZ = (zIndex * 5f) - 15f;
+                var spawnLocation = new Vector3(spawnX, 0, spawnZ);
                 CreateTower(towerUnit, spawnLocation);
             }            
         }
