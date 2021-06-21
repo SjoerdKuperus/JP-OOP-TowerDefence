@@ -27,28 +27,20 @@ public class CannonTowerUnit : TowerUnit
 
     internal override void Shoot()
     {
-        if (enemiesInRange.Count == 0)
+        if (targetableEnemies.Count == 0)
         {
             //No enemies to shoot;
             return;
         }
         // Get the first enemy, and hit it
-        var firstEnemy = enemiesInRange.First();
-        // Check if not already detroyed by other tower
-        if (firstEnemy == null)
-        {
-            enemiesInRange.Remove(firstEnemy);
-            Shoot(); //Try again on next target, if any are avaible.
-        }
-        else
-        {
-            //Launch projectile towards target.
-            var towerTop = new Vector3(transform.position.x, 5, transform.position.z);
-            var ball = Instantiate(CannonballPrefab, towerTop, Quaternion.identity, ProjectilesParrent.transform);
-            Vector3 shootVector = GetBallisticVector(firstEnemy.transform.position, ball.transform.position, 45);
+        var firstEnemy = targetableEnemies.First();
+       
+        //Launch projectile towards target.
+        var towerTop = new Vector3(transform.position.x, 5, transform.position.z);
+        var ball = Instantiate(CannonballPrefab, towerTop, Quaternion.identity, ProjectilesParrent.transform);
+        Vector3 shootVector = GetBallisticVector(firstEnemy.transform.position, ball.transform.position, 45);
 
-            ball.GetComponent<Rigidbody>().AddForce(shootVector, ForceMode.Impulse);
-        }      
+        ball.GetComponent<Rigidbody>().AddForce(shootVector, ForceMode.Impulse);
     }
 
     private Vector3 GetBallisticVector(Vector3 targetPosition, Vector3 ownPosition, float angle)

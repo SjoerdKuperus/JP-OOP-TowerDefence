@@ -19,7 +19,7 @@ public class PoisonTowerUnit : TowerUnit
 
     internal override void Shoot()
     {
-        foreach(var enemy in enemiesInRange)
+        foreach(var enemy in targetableEnemies)
         {
             if(enemy != null)
             {

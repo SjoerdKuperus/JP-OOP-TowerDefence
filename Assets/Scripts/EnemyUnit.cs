@@ -71,6 +71,11 @@ public class EnemyUnit : MonoBehaviour
         }
     }
 
+    internal bool IsTargetable()
+    {
+        return transform.position.x > -34;
+    }
+
     internal virtual void ReachedGoal()
     {
         MainManager.Instance.ReduceLives();
@@ -93,7 +98,7 @@ public class EnemyUnit : MonoBehaviour
     internal void Hit(int damage)
     {
         //Check position of the enemy. Should be invurable until passed the gate.
-        if (transform.position.x > -35)
+        if (IsTargetable())
         {
             hitPoints -= damage;
         }

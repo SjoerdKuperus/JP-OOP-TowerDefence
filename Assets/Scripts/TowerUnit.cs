@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -12,7 +13,8 @@ public class TowerUnit : MonoBehaviour
     private float shootCooldown;
 
     private bool towerIsSelected;
-    protected List<EnemyUnit> enemiesInRange;
+    private List<EnemyUnit> enemiesInRange;
+    protected List<EnemyUnit> targetableEnemies;
     private bool inCooldown;
     private float coolDownTime = 0f;    
 
@@ -45,7 +47,9 @@ public class TowerUnit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (enemiesInRange.Count > 0 && !inCooldown)
+        UpdateTargetableEnemies();
+
+        if (targetableEnemies.Count > 0 && !inCooldown)
         {
             Shoot();
             inCooldown = true;
@@ -58,6 +62,18 @@ public class TowerUnit : MonoBehaviour
             if (coolDownTime <= 0)
             {
                 inCooldown = false;
+            }
+        }
+    }
+
+    private void UpdateTargetableEnemies()
+    {
+        targetableEnemies = new List<EnemyUnit>();
+        foreach (var enemy in enemiesInRange)
+        {
+            if (enemy != null && enemy.IsTargetable())
+            {
+                targetableEnemies.Add(enemy);
             }
         }
     }
@@ -86,19 +102,21 @@ public class TowerUnit : MonoBehaviour
         }
     }
 
+
     internal virtual void Shoot()
     {
-        if(enemiesInRange.Count == 0)
+        if(targetableEnemies.Count == 0)
         {
             //No enemies to shoot;
             return;
         }
 
         // Get the first enemy, and hit it
-        var firstEnemy = enemiesInRange.First();
+        var firstEnemy = targetableEnemies.First();
         // Check if not already detroyed by other tower
         if(firstEnemy == null)
         {
+            targetableEnemies.Remove(firstEnemy);
             enemiesInRange.Remove(firstEnemy);
             Shoot(); //Try again on next target, if any are avaible.
         }
@@ -109,6 +127,7 @@ public class TowerUnit : MonoBehaviour
             firstEnemy.Hit(5);
             if (firstEnemy.IsDestroyed())
             {
+                targetableEnemies.Remove(firstEnemy);
                 enemiesInRange.Remove(firstEnemy);
             }
         }        
