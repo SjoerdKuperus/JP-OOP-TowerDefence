@@ -27,6 +27,7 @@ You can play the game at [Link](https://play.unity.com/mg/other/builds-5h-2)
 - [x] Posion tower: Status effect on enemies, take damage over time. Low cooldown, low damage, low range.
 - [x] Enemy health bars.
 - [x] Different enemy types (easy, medium, hard) with different speed/hitpoints.
+- [x] Fix bugs with resolution, ui, tower placement and shooting at enemies outside of screen.
 
 ### TODO: ###
 - [ ] Speed tower: Low cooldown, low damage, high range.
