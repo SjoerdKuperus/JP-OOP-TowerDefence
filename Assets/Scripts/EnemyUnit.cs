@@ -13,11 +13,13 @@ public class EnemyUnit : MonoBehaviour
     private bool isPoisoned;
     private float hitPointLossPerSecond;
     public AudioClip audioClip;
+    public ParticleSystem poisonParticleSystem;
 
     void Awake()
     {
         spawn = GameObject.Find("StartSpawn");
         goal = GameObject.Find("EndGoal");
+        poisonParticleSystem.Stop();
         hitPoints = maxHitPoints;
         UpdateHealtBar();
     }
@@ -88,6 +90,7 @@ public class EnemyUnit : MonoBehaviour
     {
         isPoisoned = true;
         hitPointLossPerSecond = _hitPointLossPerSecond;
+        poisonParticleSystem.Play();
     }
 
     internal virtual void Move()

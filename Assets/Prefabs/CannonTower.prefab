@@ -866,7 +866,7 @@ GameObject:
   - component: {fileID: 8086824928729545317}
   - component: {fileID: 620052078983768097}
   - component: {fileID: 570235089151595200}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: RangeIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1613,7 +1613,7 @@ GameObject:
   - component: {fileID: 8313275042535439297}
   - component: {fileID: 8584198020087485227}
   - component: {fileID: 5795779146140406308}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: CannonTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1694,7 +1694,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RangeIndicator: {fileID: 3616383142085042852}
-  SmokeShotParticle: {fileID: 0}
   shootCooldown: 2.5
   CannonballPrefab: {fileID: 694669542787598606, guid: eb391aa8f649c6040a37302150dbd6d6, type: 3}
 --- !u!1 &8840514039975579989

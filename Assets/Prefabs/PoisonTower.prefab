@@ -5741,7 +5741,7 @@ GameObject:
   - component: {fileID: 8086824928729545317}
   - component: {fileID: 620052078983768097}
   - component: {fileID: 570235089151595200}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: RangeIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6488,7 +6488,7 @@ GameObject:
   - component: {fileID: 8313275042535439297}
   - component: {fileID: 8584198020087485227}
   - component: {fileID: 4525470061018704048}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PoisonTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6570,7 +6570,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RangeIndicator: {fileID: 3616383142085042852}
-  SmokeShotParticle: {fileID: 0}
   shootCooldown: 1
 --- !u!1 &8840514039975579989
 GameObject:
