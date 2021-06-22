@@ -6472,10 +6472,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7277233522099166514}
-  - component: {fileID: 4181717893832599201}
   - component: {fileID: 8313275042535439297}
   - component: {fileID: 8584198020087485227}
   - component: {fileID: 2811804295095282631}
+  - component: {fileID: 2966564003030977496}
   m_Layer: 0
   m_Name: BasicTower
   m_TagString: Untagged
@@ -6516,21 +6516,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4181717893832599201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8677681977995131442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 390216088a26fbc42970dbffc4fbc37c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RangeIndicator: {fileID: 3616383142085042852}
-  SmokeShotParticle: {fileID: 7239903802866296388}
-  shootCooldown: 3
 --- !u!135 &8313275042535439297
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6656,6 +6641,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2966564003030977496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8677681977995131442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d025b2651acabc4e800a7a8c5c68738, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RangeIndicator: {fileID: 3616383142085042852}
+  shootCooldown: 3
+  SmokeShotParticle: {fileID: 7239903802866296388}
 --- !u!1 &8840514039975579989
 GameObject:
   m_ObjectHideFlags: 0

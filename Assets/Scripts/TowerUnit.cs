@@ -1,14 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class TowerUnit : MonoBehaviour
 {
     [SerializeField]
     private GameObject RangeIndicator;
-    [SerializeField]
-    private ParticleSystem SmokeShotParticle;
     [SerializeField]
     private float shootCooldown;
 
@@ -24,7 +21,7 @@ public class TowerUnit : MonoBehaviour
     {
         get
         {
-            return TowerType.BasicTower;
+            return TowerType.None;
         }
     }
     protected virtual void Awake()
@@ -32,17 +29,13 @@ public class TowerUnit : MonoBehaviour
         var rangeIndicatorMeshRenderer = RangeIndicator.GetComponent<MeshRenderer>();
         rangeIndicatorMeshRenderer.enabled = false;
         enemiesInRange = new List<EnemyUnit>();
-        inCooldown = false;
-        if (SmokeShotParticle != null)
-        {
-            SmokeShotParticle.Stop();
-        }
+        inCooldown = false;       
         audioData = GetComponent<AudioSource>();
     }
 
     public virtual int GetCost()
     {
-        return 25;
+        return 10000;
     }
 
     // Update is called once per frame
@@ -64,6 +57,24 @@ public class TowerUnit : MonoBehaviour
             {
                 inCooldown = false;
             }
+        }
+
+        CleanupEnemiesInRange();
+    }
+
+    private void CleanupEnemiesInRange()
+    {
+        var removeEnemies = new List<EnemyUnit>();
+        foreach (var enemy in enemiesInRange)
+        {
+            if (enemy == null)
+            {
+                removeEnemies.Add(enemy);
+            }
+        }
+        foreach (var enemyToRemove in removeEnemies)
+        {
+            enemiesInRange.Remove(enemyToRemove);
         }
     }
 
@@ -103,36 +114,9 @@ public class TowerUnit : MonoBehaviour
         }
     }
 
-
     internal virtual void Shoot()
     {
-        if(targetableEnemies.Count == 0)
-        {
-            //No enemies to shoot;
-            return;
-        }
-
-        // Get the first enemy, and hit it
-        var firstEnemy = targetableEnemies.First();
-        // Check if not already detroyed by other tower
-        if(firstEnemy == null)
-        {
-            targetableEnemies.Remove(firstEnemy);
-            enemiesInRange.Remove(firstEnemy);
-            Shoot(); //Try again on next target, if any are avaible.
-        }
-        else
-        {
-            SmokeShotParticle.transform.LookAt(firstEnemy.transform);
-            SmokeShotParticle.Play();
-            audioData.Play();
-            firstEnemy.Hit(5);
-            if (firstEnemy.IsDestroyed())
-            {
-                targetableEnemies.Remove(firstEnemy);
-                enemiesInRange.Remove(firstEnemy);
-            }
-        }        
+        Debug.Log("Base tower cannot shoot");
     }
 
     public void SelectTower()
