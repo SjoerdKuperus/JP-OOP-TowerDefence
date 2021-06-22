@@ -31,9 +31,9 @@ You can play the game at [Link](https://play.unity.com/mg/other/builds-5h-2)
 - [x] Speed tower: Low cooldown, low damage, high range.
 - [x] Music during play.
 - [x] Sound effect when fire of tower, enemy destroyed.
+- [x] Freeze tower: Slows enemies, no damage, low range.
 
 ### TODO: ###
-- [ ] Freeze tower: Slow enemies, low damage, medium range.
 - [ ] Lightning tower: Fire in a line, long range.
 - [ ] Show highscores on main menu
 - [ ] Show help information on main menu.

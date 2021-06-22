@@ -22,6 +22,11 @@ public class UiMainScene : MonoBehaviour
         MainManager.Instance.ShowBuildingGridAndPlaceTower(TowerType.SpeedTower);
     }
 
+    public void FreezeTowerClicked()
+    {
+        MainManager.Instance.ShowBuildingGridAndPlaceTower(TowerType.FreezeTower);
+    }
+
     public void SettingsClicked()
     {
         MainManager.Instance.PauseGameAndShowSettings();

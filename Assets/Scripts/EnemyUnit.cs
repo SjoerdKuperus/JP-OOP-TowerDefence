@@ -11,9 +11,11 @@ public class EnemyUnit : MonoBehaviour
     public float maxHitPoints;
     private float hitPoints;
     private bool isPoisoned;
+    private bool isSlowed;
     private float hitPointLossPerSecond;
     public AudioClip audioClip;
     public ParticleSystem poisonParticleSystem;
+    public float slowDurationTime = 0f;
 
     void Awake()
     {
@@ -49,12 +51,14 @@ public class EnemyUnit : MonoBehaviour
         // Enemy moves
         Move();
 
+        CheckSlowDuration();
+
         // Check distance to goal and handle
         if (Vector3.Distance(transform.position, goal.transform.position) < 0.001f)
         {
             ReachedGoal();
         }
-    }
+    }    
 
     // Check if we got hit by towers. Then destroy.
     private void LateUpdate()
@@ -93,10 +97,29 @@ public class EnemyUnit : MonoBehaviour
         poisonParticleSystem.Play();
     }
 
+    internal void AddFreezeEffect(float freezeDuration)
+    {
+        isSlowed = true;
+        slowDurationTime = freezeDuration;
+    }
+
+    private void CheckSlowDuration()
+    {
+        if(slowDurationTime > 0)
+        {
+            slowDurationTime -= Time.deltaTime;
+        }
+        else
+        {
+            slowDurationTime = 0;
+            isSlowed = false;
+        }
+    }
+
     internal virtual void Move()
     {
         // Move from the current position towards the goal.
-        float step = speed * Time.deltaTime;
+        float step = speed * Time.deltaTime * (isSlowed ? 0.5f: 1f);
         transform.position = Vector3.MoveTowards(transform.position, goal.transform.position, step);
     }
 

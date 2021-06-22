@@ -7,6 +7,7 @@ public class BuildingManager : MonoBehaviour
     public GameObject CannonTowerPrefab;
     public GameObject PoisonTowerPrefab;
     public GameObject SpeedTowerPrefab;
+    public GameObject FreezeTowerPrefab;
     public GameObject ParentTower;
     public int[,] BuildingArray;
 
@@ -83,6 +84,9 @@ public class BuildingManager : MonoBehaviour
                 towerPrefab = SpeedTowerPrefab.GetComponent<SpeedTowerUnit>();
                 break;
             case TowerType.FreezeTower:
+                towerPrefab = FreezeTowerPrefab.GetComponent<FreezeTowerUnit>();
+                break;
+            case TowerType.None:
             case TowerType.LightningTower:
                 Debug.Log("Tower type not yet implemented");
                 break;
