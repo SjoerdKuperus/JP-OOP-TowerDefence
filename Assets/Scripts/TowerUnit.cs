@@ -25,18 +25,16 @@ public class TowerUnit : MonoBehaviour
             return TowerType.BasicTower;
         }
     }
-
-    // Start is called before the first frame update
-    void Start()
+    protected virtual void Awake()
     {
         var rangeIndicatorMeshRenderer = RangeIndicator.GetComponent<MeshRenderer>();
         rangeIndicatorMeshRenderer.enabled = false;
         enemiesInRange = new List<EnemyUnit>();
         inCooldown = false;
-        if(SmokeShotParticle != null)
+        if (SmokeShotParticle != null)
         {
             SmokeShotParticle.Stop();
-        }        
+        }
     }
 
     public virtual int GetCost()

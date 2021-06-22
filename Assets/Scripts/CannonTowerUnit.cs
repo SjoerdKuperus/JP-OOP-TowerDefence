@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -7,9 +6,10 @@ public class CannonTowerUnit : TowerUnit
     public GameObject CannonballPrefab;
     private GameObject ProjectilesParrent;
 
-    public void Awake()
+    protected override void Awake()
     {
         ProjectilesParrent = GameObject.Find("Projectiles");
+        base.Awake();
     }
 
     public override TowerType TowerType

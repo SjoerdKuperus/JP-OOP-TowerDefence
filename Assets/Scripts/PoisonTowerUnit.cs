@@ -1,9 +1,5 @@
 public class PoisonTowerUnit : TowerUnit
 {
-    public void Awake()
-    {
-    }
-
     public override TowerType TowerType
     {
         get
