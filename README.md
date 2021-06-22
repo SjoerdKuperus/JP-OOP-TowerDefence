@@ -28,13 +28,13 @@ You can play the game at [Link](https://play.unity.com/mg/other/builds-5h-2)
 - [x] Enemy health bars.
 - [x] Different enemy types (easy, medium, hard) with different speed/hitpoints.
 - [x] Fix bugs with resolution, ui, tower placement and shooting at enemies outside of screen.
+- [x] Speed tower: Low cooldown, low damage, high range.
+- [x] Music during play.
+- [x] Sound effect when fire of tower, enemy destroyed.
 
 ### TODO: ###
-- [ ] Speed tower: Low cooldown, low damage, high range.
 - [ ] Freeze tower: Slow enemies, low damage, medium range.
 - [ ] Lightning tower: Fire in a line, long range.
-- [ ] Music during play.
-- [ ] Sound effect when fire of tower, enemy destroyed.
 - [ ] Show highscores on main menu
 - [ ] Show help information on main menu.
 
