@@ -5,6 +5,7 @@ public class ProjectileUnit : MonoBehaviour
     public int ProjectileDamage;
     public int SplashDamage;
     public float SpashRadius;
+    public AudioClip audioClip;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -26,6 +27,7 @@ public class ProjectileUnit : MonoBehaviour
                 }
             }
         }
+        AudioSource.PlayClipAtPoint(audioClip, Camera.main.transform.position, 0.4f);
         Destroy(gameObject);
         MainManager.Instance.StartDestroyAnimation(transform.position);
     }

@@ -36,6 +36,7 @@ public class SpeedTowerUnit : TowerUnit
         }
         else
         {
+            audioData.Play();
             firstEnemy.Hit(2);
             var lazerClone = Instantiate(LazerGamePrefab, this.gameObject.transform);
 

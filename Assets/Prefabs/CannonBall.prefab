@@ -128,3 +128,4 @@ MonoBehaviour:
   ProjectileDamage: 10
   SplashDamage: 6
   SpashRadius: 3
+  audioClip: {fileID: 8300000, guid: 45c12fd22a2986f4a848d7dd234f06cb, type: 3}

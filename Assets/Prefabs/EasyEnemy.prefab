@@ -193,3 +193,4 @@ MonoBehaviour:
   healthbar: {fileID: 2052690774598514216}
   speed: 4
   maxHitPoints: 5
+  audioClip: {fileID: 8300000, guid: dde8590a91d662948901604c21720bb0, type: 3}

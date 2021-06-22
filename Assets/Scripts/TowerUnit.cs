@@ -16,7 +16,9 @@ public class TowerUnit : MonoBehaviour
     private List<EnemyUnit> enemiesInRange;
     protected List<EnemyUnit> targetableEnemies;
     private bool inCooldown;
-    private float coolDownTime = 0f;    
+    private float coolDownTime = 0f;
+    
+    protected AudioSource audioData;
 
     public virtual TowerType TowerType
     {
@@ -35,6 +37,7 @@ public class TowerUnit : MonoBehaviour
         {
             SmokeShotParticle.Stop();
         }
+        audioData = GetComponent<AudioSource>();
     }
 
     public virtual int GetCost()
@@ -122,6 +125,7 @@ public class TowerUnit : MonoBehaviour
         {
             SmokeShotParticle.transform.LookAt(firstEnemy.transform);
             SmokeShotParticle.Play();
+            audioData.Play();
             firstEnemy.Hit(5);
             if (firstEnemy.IsDestroyed())
             {

@@ -12,6 +12,7 @@ public class EnemyUnit : MonoBehaviour
     private float hitPoints;
     private bool isPoisoned;
     private float hitPointLossPerSecond;
+    public AudioClip audioClip;
 
     void Awake()
     {
@@ -67,6 +68,7 @@ public class EnemyUnit : MonoBehaviour
         {
             MainManager.Instance.IncreaseScore(5);
             MainManager.Instance.StartDestroyAnimation(transform.position);
+            AudioSource.PlayClipAtPoint(audioClip, Camera.main.transform.position, 0.4f);
             Destroy(gameObject);
         }
     }
