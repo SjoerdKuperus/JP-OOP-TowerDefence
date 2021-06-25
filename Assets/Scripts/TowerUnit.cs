@@ -39,7 +39,7 @@ public class TowerUnit : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         UpdateTargetableEnemies();
 
