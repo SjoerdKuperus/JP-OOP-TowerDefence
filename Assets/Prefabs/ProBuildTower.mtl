@@ -1,0 +1,7 @@
+newmtl DesertSandBrick_StandardShader
+map_Kd DesertSandBricks_Albedo.png
+bump DesertSandBricks_normal.png
+disp DesertSandBricks_height.png
+Kd 1 1 1
+d 1
+
