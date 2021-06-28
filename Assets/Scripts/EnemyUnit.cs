@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyUnit : MonoBehaviour
 {
     private GameObject spawn;
     private GameObject goal;
+    private List<GameObject> checkPoints;
     [SerializeField]
     private GameObject healthbar;
     public float speed;
@@ -21,6 +24,7 @@ public class EnemyUnit : MonoBehaviour
     {
         spawn = GameObject.Find("StartSpawn");
         goal = GameObject.Find("EndGoal");
+        checkPoints = MainManager.Instance.LevelPathManager.GetCheckPoints();
         poisonParticleSystem.Stop();
         hitPoints = maxHitPoints;
         UpdateHealtBar();
@@ -58,6 +62,14 @@ public class EnemyUnit : MonoBehaviour
         {
             ReachedGoal();
         }
+        if (checkPoints.Any())
+        {
+            if (Vector3.Distance(transform.position, checkPoints.First().transform.position) < 0.001f)
+            {
+                //Checkpoint reached, remove and navigate to next or end goal.
+                checkPoints.Remove(checkPoints.First());
+            }
+        }            
     }    
 
     // Check if we got hit by towers. Then destroy.
@@ -120,7 +132,16 @@ public class EnemyUnit : MonoBehaviour
     {
         // Move from the current position towards the goal.
         float step = speed * Time.deltaTime * (isSlowed ? 0.5f: 1f);
-        transform.position = Vector3.MoveTowards(transform.position, goal.transform.position, step);
+
+        //If there are any checkpoints to go towards, move to those, else move towards endgoal.
+        if (checkPoints.Any())
+        {
+            transform.position = Vector3.MoveTowards(transform.position, checkPoints.First().transform.position, step);
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, goal.transform.position, step);
+        }        
     }
 
     internal void Hit(int damage)

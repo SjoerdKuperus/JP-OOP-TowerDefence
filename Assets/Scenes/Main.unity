@@ -1512,6 +1512,7 @@ MonoBehaviour:
   PathPrefab: {fileID: 1823009926237477142, guid: eda43ed4eac846a4590e1f1d4ad75b43, type: 3}
   WallPrefab: {fileID: 2358729939872679912, guid: 51f2361abf90fd445be4921b961b5a4f, type: 3}
   WallTurnRightPrefab: {fileID: 1823009926237477142, guid: 043b9653f3175654e9e96faf077af571, type: 3}
+  TurnCheckpointPrefab: {fileID: 1219918729760480024, guid: cb7688c96d74c984992ddd0c08b4a5c8, type: 3}
 --- !u!1 &575210109
 GameObject:
   m_ObjectHideFlags: 0
