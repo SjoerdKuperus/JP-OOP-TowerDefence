@@ -71,6 +71,7 @@ public class MainManager : MonoBehaviour
         BuildingManager.RemoveAllTowers();
         EconomyManager.SetupGame();
         LevelPathManager.CreateLevelFromLevelArray();
+        BuildingManager.UpdateBuildingGridWithLevelObstacles();
         RemoveAllProjectiles();
     }    
 
@@ -208,11 +209,7 @@ public class MainManager : MonoBehaviour
             // Check if the point is inside the range of the buildings
             if(hitPoint.x > -32.5 && hitPoint.x < 32.5)
             {
-                if(hitPoint.z > 2.5 && hitPoint.z < 17.5)
-                {
-                    BuildingManager.BuildTower(hitPoint, placingTowerUnit);
-                }
-                if (hitPoint.z < -2.5 && hitPoint.z > -17.5)
+                if(hitPoint.z > -17.5 && hitPoint.z < 17.5)
                 {
                     BuildingManager.BuildTower(hitPoint, placingTowerUnit);
                 }

@@ -146,6 +146,27 @@ public class LevelPathManager : MonoBehaviour
         }
     }
 
+    internal int[,] GetFreeBuildingSpaceArray()
+    {
+        //Create a 13/7 array with all the free spaces for towers.
+        //Path and other obstacles should be a negative number in the array.
+        //Free space should be 0.
+        var resultArray = new int[13, 7];
+
+        var x = 0;        
+        for (int i = 1; i < (LevelArray.GetLength(0) - 1); i++)
+        {
+            var z = 0;
+            for (int j = 1; j < (LevelArray.GetLength(1) - 1); j++)
+            {
+                resultArray[x, z] = LevelArray[i, j];
+                z++;
+            }
+            x++;
+        }
+        return resultArray;
+    }
+
     private void CreateCheckPoint(int xIndex, int zIndex)
     {
         float spawnX = (xIndex * 5f) - 35f;
