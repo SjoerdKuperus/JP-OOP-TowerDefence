@@ -21,6 +21,7 @@ public class MainManager : MonoBehaviour
     public SpawnManager SpawnManager;
     public BuildingManager BuildingManager;
     public EconomyManager EconomyManager;
+    public LevelPathManager LevelPathManager;
     public Camera GameCamera;
     public GameObject BuildGrid;
     public ParticleSystem DestroyExplosionPrefab;
@@ -69,6 +70,7 @@ public class MainManager : MonoBehaviour
         SpawnManager.RemoveAllEnemies();
         BuildingManager.RemoveAllTowers();
         EconomyManager.SetupGame();
+        LevelPathManager.CreateLevelFromLevelArray();
         RemoveAllProjectiles();
     }    
 
