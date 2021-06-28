@@ -36,15 +36,15 @@ You can play the game at [Link](https://play.unity.com/mg/other/builds-5h-2)
 - [x] Experiment with shaders
 - [x] Replace all towers with high poly prefabs. (Use probuilder)
 - [x] Add camera tilt on mouse scroll.
+- [x] Experiment with lights and shadows (Explosions, day-night cycle, ect)
+- [x] Dynamic path location with turns. Enemies stay on path. Towers can be build ouside of path.
 
 ### TODO: ###
-- [ ] Experiment with lights and shadows (Explosions, day-night cycle, ect)
 - [ ] Lightning tower: Fire in a line, long range.
 - [ ] Show highscores on main menu.
 - [ ] Show help information on main menu.
 
 ### For the future: ###
-- [ ] Dynamic path, turns.
 - [ ] Sell towers.
 - [ ] Tower upgrade system.
 - [ ] Add scenery like trees, river, mounains in background.
